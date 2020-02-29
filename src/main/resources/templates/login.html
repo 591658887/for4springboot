@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymelesf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<span th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></span>
+<form th:action="@{/user/login}" method="get">
+<input type="text" name="username"/><br>
+<input type="text" name="password"/><br>
+<input type="submit" value="login">
+</form>
+</body>
+</html>

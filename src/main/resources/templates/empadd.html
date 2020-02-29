@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymelesf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form th:action="@{/emp}" method="post">
+<input type="text" name="eid"/><br>
+<input type="text" name="ename"/><br>
+<input type="text" name="date"/><br>
+<select>
+<option th:each="dep:${deps}" th:value="${dep.did}">[[${dep.dname}]]</option>
+</select><br>
+<input type="submit" value="addemp">
+</form>
+</body>
+</html>

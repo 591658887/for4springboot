@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymelesf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type= "text/javascript" th:src="@{/js/jquery-2.1.4.js}"></script>
+<script type="text/javascript">
+	$(function() {
+//点击超链接，提交表单
+	//alert("111");
+	$(".del").click(function() {
+		$("#delForm").attr("action",$(this).attr("deluri")).submit();
+				});
+		});
+</script>
+
+</head>
+<body>
+<table>
+<tr>
+<td>编号</td>
+<td>姓名</td>
+<td>入职日期</td>
+<td>所属部门</td>
+</tr>
+<tr th:each="emp:${emps}">
+<td th:text="${emp.eid}"></td>
+<td>[[${emp.ename}]]</td>
+<td>[[${#dates.format(emp.date,"yyyy-MM-dd")}]]</td>
+<td>[[${emp.dep.dname}]]</td>
+<td><a th:href="@{/emp/}+${emp.eid}">编辑</a></td>
+<td><a class="del" th:attr="deluri=@{/emp/}+${emp.eid}" href="#">删除</a></td>
+</tr>
+</table>
+<a th:href="@{/emp}">添加员工</a>
+
+<form id="delForm" method="post">
+<input type="hidden" name="_method" value= "delete"/>
+</form>
+
+</body>
+</html>

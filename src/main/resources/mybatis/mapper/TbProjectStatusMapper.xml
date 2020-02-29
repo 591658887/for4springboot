@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.woniuxy.myspringboot.mapper.TbProjectStatusMapper" >
+  <resultMap id="BaseResultMap" type="com.woniuxy.myspringboot.entity.TbProjectStatus" >
+    <id column="project_status_id" property="projectStatusId" jdbcType="INTEGER" />
+    <result column="project_status_name" property="projectStatusName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    project_status_id, project_status_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.woniuxy.myspringboot.entity.TbProjectStatusExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_project_status
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_project_status
+    where project_status_id = #{projectStatusId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_project_status
+    where project_status_id = #{projectStatusId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.woniuxy.myspringboot.entity.TbProjectStatusExample" >
+    delete from tb_project_status
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.woniuxy.myspringboot.entity.TbProjectStatus" >
+    insert into tb_project_status (project_status_id, project_status_name
+      )
+    values (#{projectStatusId,jdbcType=INTEGER}, #{projectStatusName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.woniuxy.myspringboot.entity.TbProjectStatus" >
+    insert into tb_project_status
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="projectStatusId != null" >
+        project_status_id,
+      </if>
+      <if test="projectStatusName != null" >
+        project_status_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="projectStatusId != null" >
+        #{projectStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="projectStatusName != null" >
+        #{projectStatusName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.woniuxy.myspringboot.entity.TbProjectStatusExample" resultType="java.lang.Integer" >
+    select count(*) from tb_project_status
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_project_status
+    <set >
+      <if test="record.projectStatusId != null" >
+        project_status_id = #{record.projectStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectStatusName != null" >
+        project_status_name = #{record.projectStatusName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_project_status
+    set project_status_id = #{record.projectStatusId,jdbcType=INTEGER},
+      project_status_name = #{record.projectStatusName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.woniuxy.myspringboot.entity.TbProjectStatus" >
+    update tb_project_status
+    <set >
+      <if test="projectStatusName != null" >
+        project_status_name = #{projectStatusName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where project_status_id = #{projectStatusId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.woniuxy.myspringboot.entity.TbProjectStatus" >
+    update tb_project_status
+    set project_status_name = #{projectStatusName,jdbcType=VARCHAR}
+    where project_status_id = #{projectStatusId,jdbcType=INTEGER}
+  </update>
+</mapper>
